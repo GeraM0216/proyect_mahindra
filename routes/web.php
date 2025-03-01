@@ -11,4 +11,4 @@ Route::get('/inicio', function () {
     return view('starting_page');
 });
 
-Route::post('/chat', [OpenAIController::class,'consultaChat']);
+Route::get('chat', [OpenAIController::class,'index']);

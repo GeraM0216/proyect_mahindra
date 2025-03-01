@@ -10,30 +10,32 @@ use function Pest\Laravel\post;
 
 class OpenAIController extends Controller
 {
-    public function consultaChat(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
 
-        $search= "Who is google";
+        $search = "Who is google";
 
         $data = Http::withHeaders([
-            'Content-Type'=>'application\json',
-            'Authorization' => 'Bearer'.env('OPEN_API_KEY'),
+            'Content-Type' => 'application\json',
+            'Authorization' => 'Bearer' . env('OPEN_API_KEY'),
         ])
-        ->post('https://api.deepseek.com',[
-            'model' => 'deepseek',
-            'messages'=>[
-                [
-                    "role" => 'user',
-                    'content'=> $search
-                ]
+            ->post('https://api.deepseek.com', [
+                'model' => 'deepseek',
+                'messages' => [
+                    [
+                        "role" => 'user',
+                        'content' => $search
+                    ]
                 ],
-                'temperature'=> 0.5,
-                'max_tokens'=> 200,
-                'top_p'=> 1.0,
-                'frecuency_penalty'=> 0.52,
-                'presence_penalty'=>0.5,
-                'stop'=> ["11."],
-        ])->json();
-        return response()->json($data);
+                'temperature' => 0.5,
+                'max_tokens' => 200,
+                'top_p' => 1.0,
+                'frecuency_penalty' => 0.52,
+                'presence_penalty' => 0.5,
+                'stop' => ["11."],
+            ])->json();
+            dd($data);
+
+        return response()->json($data['choices'][0]['message'], 200, array(), JSON_PRETTY_PRINT);
     }
 }
