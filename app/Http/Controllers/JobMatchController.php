@@ -13,7 +13,8 @@ class JobMatchController extends Controller
      */
     public function index()
     {
-        //
+        $job_matches=Job_match::all();
+        return view('job_match.index',compact('job_matches'));//
     }
 
     /**

@@ -13,7 +13,8 @@ class SkillController extends Controller
      */
     public function index()
     {
-        //
+        $skills=Skill::all();
+        return view('skill.index',compact('skills'));// //
     }
 
     /**
@@ -61,6 +62,6 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+    
     }
 }

@@ -13,7 +13,8 @@ class ApplicantController extends Controller
      */
     public function index()
     {
-        //
+        $applicants=Applicant::all();
+        return view('applicant.index',compact('applicants'));
     }
 
     /**
