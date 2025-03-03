@@ -6,7 +6,7 @@ use App\Models\Job_match;
 use App\Http\Requests\StoreJob_matchRequest;
 use App\Http\Requests\UpdateJob_matchRequest;
 
-class JobMatchController extends Controller
+class Job_MatchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class JobMatchController extends Controller
     public function index()
     {
         $job_matches=Job_match::all();
-        return view('job_match.index',compact('job_matches'));//
+        return view('job_matches.index',compact('job_matches'));//
     }
 
     /**

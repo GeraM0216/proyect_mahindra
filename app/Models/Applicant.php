@@ -11,9 +11,11 @@ class Applicant extends Model
     use HasFactory;
 
     protected $table = "applicants";
+    protected $primaryKey = 'id';
+    protected $fillable = ['curriculum_id','name','age','city','email','phone_number'];
     public $timestaps = false;
 
     public function curriculum(){
-        return $this->hasOne(Curriculum::class);
+           return $this->belongsTo(Curriculum::class);
     }
 }

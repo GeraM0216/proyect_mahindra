@@ -14,7 +14,7 @@ class PredictionController extends Controller
     public function index()
     {
         $predictions=Prediction::all();
-        return view('prediction.index',compact('predictions'));// //
+        return view('prediction.index',compact('predictions'));// 
     }
 
     /**

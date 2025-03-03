@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Applicant;
 use App\Http\Requests\StoreApplicantRequest;
 use App\Http\Requests\UpdateApplicantRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\ApplicantResource;
 
 class ApplicantController extends Controller
 {
@@ -14,7 +16,7 @@ class ApplicantController extends Controller
     public function index()
     {
         $applicants=Applicant::all();
-        return view('applicant.index',compact('applicants'));
+        return view('applicants.index',compact('applicants'));
     }
 
     /**
@@ -30,21 +32,23 @@ class ApplicantController extends Controller
      */
     public function store(StoreApplicantRequest $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Applicant $applicant)
+    public function show($id)
     {
-        //
+        $applicant = Applicant::with('curriculum')->findOrFail($id);
+
+        return view('applicants.show', compact('applicant'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Applicant $applicant)
+    public function edit($id)
     {
         //
     }
@@ -52,16 +56,16 @@ class ApplicantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateApplicantRequest $request, Applicant $applicant)
+    public function update(UpdateApplicantRequest $request, $id)
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Applicant $applicant)
+    public function destroy($id)
     {
-        //
+
     }
 }

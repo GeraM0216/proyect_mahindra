@@ -52,3 +52,18 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+      <!-- 🟢 FORMULARIO PARA SUBIR ARCHIVOS 
+      <form action="{{ route('procesar.cv') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="controls">
+          <!-- Input de archivo para cargar CV 
+          <input type="file" name="archivo" id="file-input" accept=".pdf, .docx, .txt" style="display: none;"
+            onchange="mostrarNombreArchivo()">
+          <button type="button" onclick="document.getElementById('file-input').click()">
+            <i class="fas fa-upload"></i> Cargar CV
+          </button>
+          <span id="file-name" style="margin-left: 10px;"></span>
+          <button type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </div>
+      </form> -->

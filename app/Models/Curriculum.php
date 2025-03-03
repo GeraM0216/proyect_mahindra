@@ -11,10 +11,13 @@ class Curriculum extends Model
     use HasFactory;
 
     protected $table = "curriculums";
+    protected $primaryKey = 'id';
+    protected $fillable = ['experience','projects'];
+
     public $timestamps = false;
 
     public function applicant(){
-        return $this->belongsTo(Applicant::class);
+        return $this->belongsTo(Curriculum::class);
     }
 
     public function job_matches(){

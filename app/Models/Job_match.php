@@ -11,6 +11,9 @@ class Job_match extends Model
     use HasFactory;
 
     protected $table = "job_matches";
+    protected $primaryKey = 'id';
+    protected $fillable = ['curriculum_id','percentaje'];
+
     public $timestamps = false;
 
     public function curriculum(){

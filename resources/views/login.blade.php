@@ -10,42 +10,43 @@
 </head>
 
 <body>
-
     <div class="wrapper">
-        <form action="search.html ">
+        <form method="POST" action="{{ route('login') }}"> 
+            @csrf  {{-- Token de seguridad obligatorio --}}
+
             <h1>Sign In</h1>
+
+            @if (session('error'))
+                <p style="color: red;">{{ session('error') }}</p>
+            @endif
+
             <div class="input-box">
-                <input type="text" placeholder="email@techmahindra.org"required>
+                <input type="email" name="email" placeholder="email@techmahindra.org" required>
                 <i class='bx bxs-user'></i>
             </div>
 
             <div class="input-box">
-                <input type="password" placeholder="Password"required>
+                <input type="password" name="password" placeholder="Password" required>
                 <i class='bx bxs-lock'></i>
             </div>
 
             <div class="remember-forgot">
-                <label><input type="checkbox"> Remember me</label>
-                <a href="a">Forgot password?</a>
+                <label><input type="checkbox" name="remember"> Remember me</label>
+                <a href="{{ route('password.request') }}">Forgot password?</a>
             </div>
 
             <div class="login">
-                
                 <button type="submit" class="btn">Login</button>
             </div>
 
             <div class="register-link">
-                <p>Dont have an account?<a href="#">Register</a></p>
+                <p>Don't have an account? <a href="#">Register</a></p>
             </div>
 
             <div class="terms">
-                <p>By clicking continue, you agree to our<a href="#"> Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                <p>By clicking continue, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
             </div>
         </form>
-
-
     </div>
-
-
 </body>
 </html>

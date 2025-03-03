@@ -46,7 +46,16 @@ document.getElementById("send-button").addEventListener("click", function() {
       userMessage.classList.add("user-message");
       userMessage.textContent = messageInput.value;
       chatBox.appendChild(userMessage);
-      messageInput.value = ""; // Limpia el input
-      chatBox.scrollTop = chatBox.scrollHeight; // Hace scroll automático al último mensaje
+      messageInput.value = ""; 
+      chatBox.scrollTop = chatBox.scrollHeight; 
     }
   });
+    // Mostrar el nombre del archivo seleccionado
+    function mostrarNombreArchivo() {
+      var input = document.getElementById('file-input');
+      var fileName = input.files.length > 0 ? input.files[0].name : "Ningún archivo seleccionado";
+      document.getElementById('file-name').innerText = fileName;
+    }
+ 
+
+

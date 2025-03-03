@@ -11,6 +11,9 @@ class Prediction extends Model
     use HasFactory;
 
     protected $table = "predictions";
+    protected $primaryKey = 'id';
+    protected $fillable = ['curriculum_id','predictions'];
+
     public $timestamps = false;
 
     public function curriculum(){

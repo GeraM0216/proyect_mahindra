@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Curriculum;
 use App\Http\Requests\StoreCurriculumRequest;
 use App\Http\Requests\UpdateCurriculumRequest;
+use GuzzleHttp\Psr7\Request;
 
 class CurriculumController extends Controller
 {
@@ -13,16 +14,17 @@ class CurriculumController extends Controller
      */
     public function index()
     {
-        $curriculums=Curriculum::all();
-        return view('curriculum.index',compact('curriculums')); //
+        $curriculums = Curriculum::with(['applicant', 'skills', 'predictions', 'jobMatches'])->get();
+
+        return view('curriculums.index', compact('curriculums'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+  
     }
 
     /**
@@ -36,15 +38,17 @@ class CurriculumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Curriculum $curriculum)
+    public function show($id)
     {
-        //
+        $curriculum = Curriculum::with(['applicant', 'skills', 'predictions', 'jobMatches'])->findOrFail($id);
+
+        return view('curriculums.show', compact('curriculum')); //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Curriculum $curriculum)
+    public function edit(Curriculum $curriculums)
     {
         //
     }
@@ -52,7 +56,7 @@ class CurriculumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCurriculumRequest $request, Curriculum $curriculum)
+    public function update(UpdateCurriculumRequest $request, Curriculum $curriculums)
     {
         //
     }
@@ -60,7 +64,7 @@ class CurriculumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Curriculum $curriculum)
+    public function destroy(Curriculum $curriculums)
     {
         //
     }
