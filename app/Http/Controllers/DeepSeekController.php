@@ -12,7 +12,7 @@ use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Element\Text;
 use Smalot\PdfParser\Parser;
 
-class OpenAIController extends Controller
+class DeepSeekController extends Controller
 {
     public function procesarCV(Request $request)
     {
@@ -81,26 +81,54 @@ class OpenAIController extends Controller
         return $contenido;
     }
 
-    // Función para enviar a la IA y analizar el contenido
-    public function analizarCurriculumConIA($contenido)
-    {
-        // API de OpenAI o Deepseek, según el caso
-        $apiKey = 'sk-cab0d97cc1264ebfba335fec2c1a3fc0'; // Tu API Key
-        $url = 'https://api.deepseek.com/'; // Base URL de Deepseek o OpenAI
+    public function procesarMensajeUsuario(Request $request)
+{
+    // Obtener el mensaje del usuario de la solicitud
+    $mensajeUsuario = $request->input('mensaje');  // Aquí se espera el mensaje del usuario como un texto
 
-        // Crear el cuerpo de la solicitud para la IA
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $apiKey,
-            'Content-Type' => 'application/json',
-        ])->post($url, [
-            'model' => 'deepseek-chat',  // Usar el modelo adecuado
-            'messages' => [
-                ["role" => "system", "content" => "Eres un asistente que analiza currículums."],
-                ["role" => "user", "content" => "Analiza este currículum:\n" . $contenido],
-            ]
-        ]);
-
-        // Obtener la respuesta
-        return $response->json()['choices'][0]['message']['content'];
+    // Validar que el mensaje no esté vacío
+    if (empty($mensajeUsuario)) {
+        return response()->json(['error' => 'No se recibió un mensaje'], 400);
     }
+
+    // Llamar a la función para procesar el mensaje con la IA
+    $respuestaIA = $this->analizarCurriculumConIA($mensajeUsuario);
+
+    // Devolver la respuesta procesada
+    return response()->json(['respuesta' => $respuestaIA]);
+}
+    // Función para enviar a la IA y analizar el contenido
+    public function analizarCurriculumConIA($mensajeUsuario)
+{
+    // Definir la clave de API y la URL de la API de DeepSeek
+    $apiKey = 'sk-cab0d97cc1264ebfba335fec2c1a3fc0';
+    $url = 'https://api.deepseek.com'; // URL de la API de DeepSeek (o OpenAI)
+
+    // Crear la solicitud para enviar a la API
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . $apiKey,
+        'Content-Type' => 'application/json',
+    ])->post($url, [
+        'model' => 'deepseek-chat',  // Usar el modelo adecuado
+        'messages' => [
+            ["role" => "system", "content" => "Eres un asistente que analiza currículums."],
+            ["role" => "user", "content" => $mensajeUsuario],  // Aquí va el mensaje del usuario
+        ]
+    ]);
+
+    // Verificar la respuesta de la API
+    $responseJson = $response->json();
+
+    // Asegurarse de que la respuesta contiene lo esperado
+    if (isset($responseJson['choices'][0]['message']['content'])) {
+        return response()->json([
+            'response' => $responseJson['choices'][0]['message']['content']
+        ]);
+    } else {
+        // En caso de que la respuesta no sea válida
+        return 'Hola en que puedo ayudarte';
+    }
+}
+
+
 }

@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+
+    'deepseek' => [
+        'api_key' => env('OPEN_API_KEY'),
+        'base_url' => 'https://api.deepseek.com',
+    ],
+
+
 ];

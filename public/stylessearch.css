@@ -138,6 +138,15 @@ button:hover {
   cursor: pointer;
 }
 
+.user-message, .ai-message {
+  padding: 10px;
+  border-radius: 15px;
+  max-width: 70%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: 5px 10px;
+  word-wrap: break-word;
+}
+
 .user-message {
   background-color: #31742B;
   color: white;
@@ -165,6 +174,13 @@ button:hover {
   border-left: 10px solid #31742B;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
+}
+
+.ai-message {
+  background-color: #444;
+  color: white;
+  align-self: flex-start;
+  text-align: left;
 }
 
 #chat-box {

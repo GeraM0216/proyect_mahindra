@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();  //PK
             $table->unsignedBigInteger('curriculum_id');  //FK
             $table->foreign('curriculum_id')->references('id')->on('curriculums')->onDelete('cascade'); // llave foranea con curriculums
-            $table->float('percentage', 5);
+            $table->float('percentage');
             $table->timestamps();
         });
     }
